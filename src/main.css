@@ -1,0 +1,99 @@
+:root {
+  --primary-color: #c0e1d2;
+  --secondary-color: #e5eee4;
+  --tri-color: #f6f4e8;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-size: clamp(16px, 20px, 24px);
+  font-family: "Rubik Storm";
+}
+
+#root {
+  background-color: var(--primary-color);
+  color: var(--tri-color);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  color: black;
+  overflow: auto;
+}
+
+@font-face {
+    font-family: "Rubik Storm";
+    src: url("./assets/ABeeZee-Regular.ttf");
+}
+
+.diffculty-container {
+  background-color: var(--secondary-color);
+  color: black;
+  padding: 1rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+@media (min-width: 500px) {
+  .diffculty-container {
+    transform: scale(1.5);
+  }
+}
+
+.diffculty-container button {
+  background-color: var(--primary-color);
+  border: none;
+  margin: 5px;
+  color: black;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+}
+
+.diffculty-container button:hover {
+  background-color: var(--secondary-color);
+  font-weight: 900;
+}
+
+.diffculty-container button:active {
+  transform: translateY(10px);
+}
+
+.display-images {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-display {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.card button {
+  border-radius: 10px;
+  border: none;
+}
+
+.card button:hover {
+  transform: translateY(-10px);
+}
+
+.card button:active {
+  transform: translateY(10px);
+}
+.p-elements {
+  display: flex;
+  gap: 1rem;
+}
