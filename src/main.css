@@ -27,8 +27,27 @@ body {
 }
 
 @font-face {
-    font-family: "Rubik Storm";
-    src: url("./assets/ABeeZee-Regular.ttf");
+  font-family: "Rubik Storm";
+  src: url("./assets/ABeeZee-Regular.ttf");
+}
+
+.loading-icon{
+  height: 5rem;
+  animation-name: pokemonJump;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  display: none;
+}
+
+@keyframes pokemonJump {
+  0%{
+    transform: translateY(0px);
+  }
+  100%{
+    transform: translateY(20px);
+  }
+  
 }
 
 .diffculty-container {
@@ -76,8 +95,6 @@ body {
 
 .card-display {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   gap: 0.5rem;
 }
 
@@ -97,3 +114,5 @@ body {
   display: flex;
   gap: 1rem;
 }
+
+

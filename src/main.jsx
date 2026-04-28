@@ -2,6 +2,7 @@ import { StrictMode, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Main } from "./renderAllComponents";
 import "./main.css";
+import loadingIcon from "./assets/3.svg"
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -17,6 +18,7 @@ createRoot(document.getElementById("root")).render(
       </ul>
     </p>
     </div> */}
+    <img className="loading-icon" src={loadingIcon} alt="pokemon-loading" />
     <Main />
   </StrictMode>,
 );

@@ -11,9 +11,8 @@ export function GetImages({
   setChoice,
   currentScore,
   bestScore,
-  refresh
+  refresh,
 }) {
-
   function diffcultyToNumber() {
     let number = 0;
     if (diffculty === "easy") {
@@ -23,6 +22,11 @@ export function GetImages({
     } else if (diffculty === "hard") {
       return (number = 12);
     }
+  }
+
+  function setLoader(setDisplay){
+    const loadingIcon = document.querySelector(".loading-icon");
+    loadingIcon.style.display = `${setDisplay}`
   }
 
   useEffect(() => {
@@ -205,32 +209,65 @@ export function GetImages({
 
     const set = imageIndex();
     async function gettingImages(pokemonName) {
-      try{
-      const response = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${pokemonName}`,
-      );
-      const data = await response.json();
-      const result = data.sprites.back_default;
-      setImages((prev) => [...prev, result]);
-      return result;
-    } catch {
-      new Error("Oops, something went wrong!")
-    }
+      setLoader("block")
+      try {
+        const response = await fetch(
+          `https://pokeapi.co/api/v2/pokemon/${pokemonName}`,
+        );
+        const data = await response.json();
+        const result = data.sprites.back_default;
+        setImages((prev) => [...prev, result]);
+        return result;
+      } catch {
+        new Error("Oops, something went wrong!");
+      } finally {
+        setLoader("none")
+      }
     }
     async function mapArrayToState() {
+      setLoader("block")
+      try{
       await Promise.all(
         set.map(async (url) => {
           await gettingImages(url);
         }),
       );
+    } catch {
+      new Error("Oops, an error occured.")
+    }
+    finally{
+      setLoader("none")
+    }
     }
 
     mapArrayToState();
 
-    return () =>{
-      setImages([])
-    }
+    return () => {
+      setImages([]);
+    };
   }, [refresh]);
+
+  function setCardDisplay() {
+    try{
+    const cardDiv = document.querySelector(".card-display");
+    if (diffculty === "easy") {
+      cardDiv.style.gridTemplateColumns = "repeat(2, 1fr)";
+      cardDiv.style.gridTemplateRows = "repeat(2,1fr)";
+    } else if (diffculty === "medium") {
+      cardDiv.style.gridTemplateColumns = "repeat(4, 1fr)";
+      cardDiv.style.gridTemplateRows = "repeat(2,1fr)";
+    } else if (diffculty === "hard") {
+      cardDiv.style.gridTemplateColumns = "repeat(3, 1fr)";
+      cardDiv.style.gridTemplateRows = "repeat(4,1fr)";
+    }
+  } catch{
+    console.log("Oops, that element doesn't exist yet!")
+  }
+  }
+
+  setCardDisplay();
+
+
 
   return (
     <>
